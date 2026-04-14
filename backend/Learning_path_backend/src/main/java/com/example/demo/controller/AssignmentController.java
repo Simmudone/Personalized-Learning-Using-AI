@@ -22,7 +22,7 @@ public class AssignmentController {
         this.assignmentService = assignmentService;
     }
 
-    // ✅ Generate AI Assignment
+    //  Generate AI Assignment
     @PostMapping("/generate")
     public Map<String, Object> generateAssignment(
             @RequestBody Map<String, String> request) {
@@ -32,11 +32,12 @@ public class AssignmentController {
         boolean isFinal = Boolean.parseBoolean(
                 request.getOrDefault("isFinal", "false")
         );
+        boolean isProgramming = Boolean.parseBoolean(
+                request.getOrDefault("isProgramming", "false")
+        );
 
-        // 🔥 Call Gemini API
-//        String questions = geminiService.generateQuestions(moduleContent);
-        String questions = geminiService.generateQuestions(moduleContent, isFinal);
-        // 🔥 Save to Firebase
+        String questions = geminiService.generateQuestions(moduleContent, isFinal, isProgramming);
+        //   Save to Firebase
         assignmentService.saveAssignment(userId, moduleContent, questions);
 
         return Map.of(
@@ -45,7 +46,7 @@ public class AssignmentController {
         );
     }
 
-    // ✅ Submit Assignment
+    //  Submit Assignment
     @PostMapping("/submit")
     public Map<String, Object> submitAssignment(
             @RequestBody Map<String, Object> request) {

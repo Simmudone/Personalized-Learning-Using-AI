@@ -14,32 +14,16 @@ public class GeminiService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    public String generateQuestions(String content, boolean isFinal) {
+    public String generateQuestions(String content, boolean isFinal, boolean isProgramming) {
 
         String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
         String prompt;
-//        boolean isProgramming = content.toLowerCase().matches(
-//                ".*(java|python|c\\+\\+|javascript|programming|coding|algorithm|data structure).*"
-//        );
-        String lower = content.toLowerCase();
-
-        boolean isProgramming =
-                lower.contains("java") ||
-                        lower.contains("python") ||
-                        lower.contains("c++") ||
-                        lower.contains("javascript") ||
-                        lower.contains("react") ||
-                        lower.contains("node") ||
-                        lower.contains("coding") ||
-                        lower.contains("programming") ||
-                        lower.contains("algorithm") ||
-                        lower.contains("data structure");
         if (isFinal)
         {
 
             if(isProgramming)
             {
-                // 🔥 FINAL ASSIGNMENT
+                //   FINAL ASSIGNMENT
                 prompt = """
                 You are a professional programming instructor.
                 
@@ -102,40 +86,21 @@ public class GeminiService {
             else
             {
                 prompt = """
-//                You are a professional programming instructor.
-//                
-//                Generate a FINAL EXAM for the course:
-//                
-//                %s
-//                
-//                Rules:
-//                - Generate exactly 15 MCQ questions
-//                - Questions must cover the ENTIRE COURSE (not UI or unrelated code)
-//                - Focus on core concepts, logic, and understanding
-//                
-//                - 2 descriptive / case-study questions
-//                - NO coding questions
-//                
-//                IMPORTANT:
-//                - Do NOT generate questions about UI, dashboards, or frontend components
-//                - Focus only on core concepts of the course
-            You are an expert instructor.
-            
+                You are an expert instructor.
+                
                 Generate a FINAL EXAM STRICTLY based on the following course:
-            
+                
                 COURSE NAME:
                 %s
-            
+                
                 IMPORTANT RULES:
                 - ALL questions MUST be directly related to the course topic
-                - DO NOT include programming, coding, or unrelated technical concepts
+                - DO NOT include programming or coding questions
                 - DO NOT mix other domains
-                - Questions must reflect real concepts from this subject
-            
+                
                 Requirements:
                 - Generate exactly 15 MCQ questions
                 - Generate 2 descriptive/theory questions
-                - Questions must test understanding of THIS COURSE ONLY               
                 
                 Return ONLY JSON:
                 {
@@ -147,19 +112,19 @@ public class GeminiService {
                     }
                   ],
                   "theory": [
-                              {
-                                "question": "..."
-                              }
+                    {
+                      "question": "..."
+                    }
                   ]
                 }
                 """.formatted(content);
-            }
+                            }
         }
         else
         {
             if(isProgramming)
             {
-                // 🔥 MODULE ASSIGNMENT
+                //   MODULE ASSIGNMENT
                 prompt = """
                 You are a professional teacher.
                 
@@ -203,7 +168,7 @@ public class GeminiService {
             }
             else
             {
-                // 🔥 MODULE ASSIGNMENT
+                //   MODULE ASSIGNMENT
                 prompt = """
                 You are a professional teacher.
                 

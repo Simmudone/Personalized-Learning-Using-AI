@@ -104,7 +104,7 @@ const CourseLearningPage = () => {
         setEnrollmentId(enrollment.id);
         setProgress(enrollment.data().progress || 0);
 
-        // 🔥 IMPORTANT FIX
+        //   IMPORTANT FIX
         setCompletedIds(
           enrollment.data().completedModules || []
         );
@@ -340,7 +340,7 @@ const CourseLearningPage = () => {
               onClick={() => {
                 if (completedIds.length === course.modules.length) {
 
-                  // 🔥 FULL COURSE CONTENT (BEST VERSION)
+                  //   FULL COURSE CONTENT (BEST VERSION)
                   const fullCourseContent = course.modules
                     .map((m: any) =>
                       m.items
@@ -434,9 +434,6 @@ const CourseLearningPage = () => {
 
               <button
                 onClick={() =>
-                  // navigate(
-                  //   `/assignment/${course.id}/${activeModule.id}`
-                  // )
                   navigate(
                       `/assignment/${course.id}/${activeModule.id}`,
                     {

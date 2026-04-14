@@ -3,14 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Brain, Target, BarChart3, Users, Sparkles, User } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
-
 const features = [
-  // { icon: Brain, title: "AI-Powered Paths", desc: "Personalized learning based on your style & performance" },
   { icon: Target, title: "Domain Mastery", desc: "Complete domains to unlock dynamic AI-generated assignments" },
-  // { icon: BarChart3, title: "Performance Tracking", desc: "Real-time analytics on your progress and weak areas" },
   { icon: BookOpen, title: "Rich Resources", desc: "Videos, PDFs, interactive content matched to your style" },
   { icon: User, title: "AI Assignments", desc: "Ai based Assignments generator." },
-  // { icon: Sparkles, title: "Smart Recommendations", desc: "AI suggests topics, pace, and content type for you" },
 ];
 
 const Landing = () => {

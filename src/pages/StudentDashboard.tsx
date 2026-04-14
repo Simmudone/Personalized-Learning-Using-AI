@@ -1,5 +1,3 @@
-
-
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
@@ -194,7 +192,7 @@ const StudentDashboard = () => {
                   {course.progress}% Learning Completed
                 </p>
 
-                {/* 🔥 FINAL STATUS */}
+                {/*   FINAL STATUS */}
                 {course.progress === 100 && !course.courseCompleted && (
                   <p className="text-yellow-600 text-xs mb-2">
                     ⚠ Final Assessment Pending
@@ -254,7 +252,7 @@ const StudentDashboard = () => {
 
                 <div className="flex gap-2">
 
-                {/* ✅ COMPLETED BADGE (NOT CLICKABLE) */}
+                {/*  COMPLETED BADGE (NOT CLICKABLE) */}
                 <Button
                   disabled
                   className="w-1/2 bg-green-600 text-white cursor-default"
@@ -262,7 +260,7 @@ const StudentDashboard = () => {
                   Completed
                 </Button>
 
-                {/* 🔁 VIEW BUTTON */}
+                {/*  VIEW BUTTON */}
                 <Button
                   className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white"
                   onClick={() => navigate(`/learn/${course.courseId}`)}

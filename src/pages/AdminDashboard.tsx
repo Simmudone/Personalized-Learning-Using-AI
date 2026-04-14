@@ -476,7 +476,7 @@ const AdminDashboard = () => {
             </Card>
           ))}
         </div>
-        {/* 🔥 DELETE CONFIRMATION DIALOG */}
+        {/*   DELETE CONFIRMATION DIALOG */}
         <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
           <DialogContent>
             <DialogHeader>

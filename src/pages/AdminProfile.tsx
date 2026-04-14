@@ -30,22 +30,12 @@ const AdminProfile = () => {
 
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-
-  // ✅ Load Firebase user info
-  // useEffect(() => {
-  //   const user = auth.currentUser;
-
-  //   if (user) {
-  //     setName(user.displayName || "");
-  //     setEmail(user.email || "");
-  //   }
-  // }, []);
   useEffect(() => {
   const loadUser = async () => {
     const user = auth.currentUser;
 
     if (user) {
-      await user.reload(); // 🔥 FORCE refresh from Firebase
+      await user.reload(); //   FORCE refresh from Firebase
 
       setName(user.displayName || "");
       setEmail(user.email || "");
@@ -55,7 +45,7 @@ const AdminProfile = () => {
   loadUser();
 }, []);
 
-  // ✅ Update Display Name
+  //  Update Display Name
   const handleSaveProfile = async () => {
     try {
       const user = auth.currentUser;
@@ -76,7 +66,7 @@ const AdminProfile = () => {
     }
   };
 
-  // ✅ Change Password
+  //  Change Password
   const handleChangePassword = async () => {
     try {
       const user = auth.currentUser;
@@ -99,7 +89,7 @@ const AdminProfile = () => {
       setMessage("Password updated successfully!");
       setIsSuccess(true);
 
-      // ✅ Clear fields after success
+      //  Clear fields after success
       setCurrentPassword("");
       setNewPassword("");
     } catch (error: any) {

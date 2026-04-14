@@ -56,7 +56,7 @@ const StudentLogin = () => {
       const user = userCredential.user;
       const idTokenResult = await user.getIdTokenResult(true);
 
-      // ❌ Block admin from student login
+      //  Block admin from student login
       if (idTokenResult.claims.role === "admin") {
         alert("Admins must login from Admin page");
         await signOut(auth);

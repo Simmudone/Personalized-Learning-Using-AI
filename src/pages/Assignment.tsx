@@ -64,37 +64,35 @@ const Assignment = () => {
   setFallbackMode(false);
 
   try {
-    // 🔥 ADD THIS CHECK FIRST
+    
       if (!user?.uid) {
         alert("User not loaded. Please try again.");
         return;
       }
-    // const response = await axios.post(
-    //   "http://localhost:8080/api/assignment/generate",
-    //   {
-      
-    //   moduleContent: moduleTitle,
-    //   isFinal: moduleId === "final",
-    //   userId: user?.uid || "student",
-    //   }
-    // );
-    const response = await axios.post(
-        "http://localhost:8080/api/assignment/generate",
-        {
-          moduleContent:
-            moduleId === "final"
-              ? "Course: " + moduleTitle + " programming coding algorithms"
-              : moduleTitle,
+          const isCodingCourse =
+          moduleTitle.toLowerCase().includes("java") ||
+          moduleTitle.toLowerCase().includes("python") ||
+          moduleTitle.toLowerCase().includes("javascript") ||
+          moduleTitle.toLowerCase().includes("react");
+          
+          const cleanContent =
+          moduleId === "final"
+            ? "Course: " + moduleTitle + " concepts"
+            : moduleTitle;
 
-          isFinal: moduleId === "final",
-
-          userId: user.uid, // 🔥 remove "student" fallback
-        }
-      );
+        const response = await axios.post(
+          "http://localhost:8080/api/assignment/generate",
+          {
+            moduleContent: cleanContent,
+            isFinal: moduleId === "final",
+            isProgramming: isCodingCourse, 
+            userId: user.uid,
+          }
+        );
 
     let text = response.data.questions;
 
-    console.log("RAW RESPONSE:", text); // 🔥 debug
+    console.log("RAW RESPONSE:", text); 
 
     let cleanText = text
       .replace(/```json/g, "")
@@ -118,7 +116,7 @@ const Assignment = () => {
   } catch (error) {
     console.error("API ERROR:", error);
 
-    // 🔥 FALLBACK MODE
+    //  FALLBACK MODE
     setFallbackMode(true);
     setQuestions([]);
     setCodingQuestions([]);
@@ -151,7 +149,7 @@ const Assignment = () => {
     if (!snap.empty) {
       const enrollmentDoc = snap.docs[0];
 
-      // 🔥 MODULE ASSIGNMENT
+      //  MODULE ASSIGNMENT
       if (!isFinal && percent >= 75) {
         const prevPassed =
           enrollmentDoc.data().assignmentPassedModules || [];
@@ -167,7 +165,7 @@ const Assignment = () => {
         );
       }
 
-      // 🔥 FINAL ASSIGNMENT
+      //  FINAL ASSIGNMENT
       if (isFinal) {
         await updateDoc(
           doc(db, "enrollments", enrollmentDoc.id),
@@ -202,7 +200,7 @@ const Assignment = () => {
 
   return (
     <>
-      {/* 🔥 NAVBAR (NO COURSES / DASHBOARD) */}
+      {/*   NAVBAR (NO COURSES / DASHBOARD) */}
       <nav className="border-b bg-white shadow-sm px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <GraduationCap className="h-7 w-7 text-blue-600" />
@@ -242,7 +240,7 @@ const Assignment = () => {
         </DropdownMenu>
       </nav>
 
-      {/* 🔥 BACK BUTTON */}
+      {/*  BACK BUTTON */}
 
       <div className="px-8 pt-4">
         <button
@@ -254,7 +252,7 @@ const Assignment = () => {
         </button>
       </div>
 
-      {/* 🔥 CONTENT */}
+      {/*  CONTENT */}
       <div className="max-w-3xl mx-auto p-6">
         {isFinal && !started && (
           <div className="bg-white p-8 rounded shadow text-center mb-6">
@@ -386,14 +384,14 @@ const Assignment = () => {
           ))}
         </div>
       )}
-        {/* 🔥 ADD HERE (LOADING MESSAGE) */}
+        {/*   ADD HERE (LOADING MESSAGE) */}
         {isFinal && started && loading && (
           <div className="text-center mt-10 text-blue-600 text-lg">
             Generating AI Questions...
           </div>
         )}
         {/* {(!isFinal || started) && ( */}
-        {/* 🔥 FALLBACK MESSAGE */}
+        {/*   FALLBACK MESSAGE */}
         {fallbackMode && (
           <div className="text-center text-orange-600 mb-4">
             ⚠️ AI limit reached. You can still submit this assignment.
@@ -446,7 +444,6 @@ const Assignment = () => {
             )}
           </div>
         )}
-        {/* 🔥 ADD POPUP HERE */}
         {showResultPopup && score !== null && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             

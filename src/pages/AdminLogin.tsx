@@ -32,7 +32,7 @@
 //         password
 //       );
 
-//       // 🔥 Get custom claims
+//       //   Get custom claims
 //       const idTokenResult =
 //         await userCredential.user.getIdTokenResult(true);
 
